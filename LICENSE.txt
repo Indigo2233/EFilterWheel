@@ -1,0 +1,38 @@
+非商业授权许可协议（Non-Commercial License Agreement）
+
+版权所有 © 2025 Eric
+All rights reserved.
+
+本项目以"仅限非商业用途"模式授权发布。
+
+This software and all associated files are licensed for NON-COMMERCIAL USE ONLY.
+You are free to use, modify, and share the code under the following conditions:
+
+1. 禁止任何形式的商业用途，包括但不限于：将本软件用于商业产品、提供商业服务、
+   嵌入付费系统、通过直接或间接方式获利等。
+   Commercial use is strictly prohibited, including but not limited to use in
+   commercial products, provision of paid services, integration into
+   revenue-generating systems, or any direct or indirect profit.
+
+2. 允许在学术研究、个人学习、开源协作、教育演示等非营利目的下使用本项目。
+   This project may be used for non-commercial purposes such as academic research,
+   personal learning, open-source collaboration, and educational demonstrations.
+
+3. 在再发布本软件或其修改版本时，必须完整保留本授权协议及原作者的版权信息。
+   Redistributions of this software, whether modified or unmodified, must retain
+   this license agreement and the original copyright notice.
+
+4. 不得将本软件用于任何违法、违规或违反道德规范的用途。
+   This software may not be used for any illegal, unethical, or unlawful purposes.
+
+如需商业授权，请与作者联系以获得书面许可。
+For commercial licensing inquiries, please contact the author for written permission.
+
+联系方式 / Contact:
+微信：ericbo
+
+—
+
+本许可协议不符合开放源代码促进会（OSI）开源定义，亦不属于任何 OSI 批准的标准开源许可证。
+This license does not conform to the Open Source Initiative (OSI) definition
+and is not an OSI-approved open source license.
