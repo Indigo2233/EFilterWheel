@@ -5,6 +5,7 @@
 
 #include "eeprom_config.h"
 #include "hal.h"
+#include <stdio.h>
 #include <string.h>
 
 /* =========================================================================

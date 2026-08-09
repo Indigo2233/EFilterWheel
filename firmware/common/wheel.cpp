@@ -20,6 +20,8 @@
 #include "motion.h"
 #include "hal.h"
 #include "eeprom_config.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /* =========================================================================
  * 回零阶段
@@ -435,7 +437,7 @@ const char* wheel_get_error_string(void)
     case ERR_NOT_READY:      return "Device not ready";
     case ERR_BUSY:           return "Device busy";
     case ERR_HOMING_FAILED:  return "Homing failed";
-    case ERR_TIMEOUT:        return "Timeout";
+    case ERR_MOTION_TIMEOUT: return "Timeout";
     case ERR_SENSOR_FAULT:   return "Sensor fault";
     case ERR_EEPROM_FAIL:    return "EEPROM failure";
     case ERR_INVALID_CONFIG: return "Invalid configuration";

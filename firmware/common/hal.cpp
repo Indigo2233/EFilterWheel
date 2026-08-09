@@ -356,6 +356,8 @@ ISR(TIMER1_COMPA_vect)
 static Ticker step_ticker;
 static Ticker tick_ticker_static;
 static void (*esp_step_cb)(void) = nullptr;
+static uint16_t esp_step_interval_us = 0;
+static uint32_t esp_next_step_us = 0;
 
 void hal_timer_set_step_callback(void (*callback)(void), uint16_t interval_us)
 {
@@ -365,13 +367,15 @@ void hal_timer_set_step_callback(void (*callback)(void), uint16_t interval_us)
     if (callback == nullptr || interval_us == 0) return;
 
     // ESP8266 Ticker 支持微秒级
-    step_ticker.attach_us(interval_us, callback);
+    esp_step_interval_us = interval_us;
+    esp_next_step_us = micros() + interval_us;
 }
 
 void hal_timer_stop_step(void)
 {
     step_ticker.detach();
     esp_step_cb = nullptr;
+    esp_step_interval_us = 0;
 }
 
 void hal_timer_set_tick_callback(void (*callback)(void))
@@ -508,6 +512,13 @@ void hal_platform_init(void)
 
 void hal_platform_yield(void)
 {
+    #if defined(PLATFORM_ESP8266)
+    if (esp_step_cb != nullptr && esp_step_interval_us != 0
+        && (int32_t)(micros() - esp_next_step_us) >= 0) {
+        esp_next_step_us = micros() + esp_step_interval_us;
+        esp_step_cb();
+    }
+    #endif
 #if defined(PLATFORM_ESP8266)
     yield();  // 让出 CPU 给 WiFi 栈
 #endif

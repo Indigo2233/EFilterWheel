@@ -85,7 +85,7 @@ typedef enum {
     ERR_NOT_READY       = 3,    ///< 设备未就绪
     ERR_BUSY            = 4,    ///< 设备忙
     ERR_HOMING_FAILED   = 5,    ///< 回零失败
-    ERR_TIMEOUT         = 6,    ///< 移动超时
+    ERR_MOTION_TIMEOUT  = 6,    ///< 移动超时
     ERR_SENSOR_FAULT    = 7,    ///< 传感器故障
     ERR_EEPROM_FAIL     = 8,    ///< EEPROM 读写失败
     ERR_INVALID_CONFIG  = 9,    ///< 无效配置

@@ -10,6 +10,7 @@
 #define WHEEL_H
 
 #include "config.h"
+#include "eeprom_config.h"
 
 /* =========================================================================
  * 滤镜轮状态（与全局 device_state_t 对应）

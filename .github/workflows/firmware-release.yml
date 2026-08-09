@@ -1,0 +1,45 @@
+name: Firmware Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "firmware-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PlatformIO
+        run: pip install platformio==6.1.18
+      - name: Compile firmware
+        run: |
+          pio run -e nano
+          pio run -e esp8266
+          mkdir -p assets
+          cp .pio/build/nano/firmware.hex assets/efilterwheel-nano-v1.0.0.hex
+          cp .pio/build/esp8266/firmware.bin assets/efilterwheel-esp8266-v1.0.0.bin
+      - name: Create firmware manifest
+        shell: python
+        run: |
+          import hashlib, json
+          from pathlib import Path
+          items = [
+            dict(id="efilterwheel-nano", displayName="EFilterWheel Arduino Nano", deviceKind="FilterWheel", hardwareId="arduino-nano-filterwheel", version="1.0.0", protocolVersion=1, identityPattern=r"^OK\s+EFilterWheel-Nano\s+FW:\d+\.\d+\.\d+\s+PROTO:\d+\.\d+$", target="NanoAuto", fileName="efilterwheel-nano-v1.0.0.hex", baudRate=57600, notes="Arduino Nano filter-wheel controller"),
+            dict(id="efilterwheel-esp8266", displayName="EFilterWheel ESP8266", deviceKind="FilterWheel", hardwareId="esp8266-d1mini-filterwheel", version="1.0.0", protocolVersion=1, identityPattern=r"^OK\s+EFilterWheel-ESP8266\s+FW:\d+\.\d+\.\d+\s+PROTO:\d+\.\d+$", target="Esp8266", fileName="efilterwheel-esp8266-v1.0.0.bin", baudRate=57600, notes="Wemos D1 mini filter-wheel controller")
+          ]
+          for item in items:
+            item["sha256"] = hashlib.sha256((Path("assets") / item["fileName"]).read_bytes()).hexdigest().upper()
+          Path("assets/firmware-manifest.json").write_text(json.dumps({"schemaVersion": 1, "repository": "Indigo2233/EFilterWheel", "firmware": items}, indent=2), encoding="utf-8")
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: assets/*
+          generate_release_notes: true

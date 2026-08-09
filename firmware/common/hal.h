@@ -145,6 +145,8 @@ void hal_platform_init(void);
 /// 后台循环中的平台任务（ESP8266 用于 WiFi/网络处理）
 void hal_platform_yield(void);
 
+void hal_tick_process(void);
+
 /// 系统复位
 void hal_system_reset(void);
 

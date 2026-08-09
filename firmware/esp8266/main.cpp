@@ -12,6 +12,7 @@
  * 依赖: ESP8266WiFi, ESP8266WebServer, ESP8266mDNS, DNSServer
  */
 
+#include <Arduino.h>
 #include "hal.h"
 #include "motion.h"
 #include "wheel.h"

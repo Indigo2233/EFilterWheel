@@ -13,6 +13,7 @@
  *      - 喂狗
  */
 
+#include <Arduino.h>
 #include "hal.h"
 #include "motion.h"
 #include "wheel.h"
